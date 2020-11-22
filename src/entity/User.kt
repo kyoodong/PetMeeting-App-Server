@@ -9,16 +9,20 @@ import org.jetbrains.exposed.sql.`java-time`.datetime
 import java.time.LocalDateTime
 
 object Users : IdTable<String>() {
-    override val id: Column<EntityID<String>>
-        get() = TODO("Not yet implemented")
-
-    val gender = text("gender")
+    val userId = varchar("id", 100).uniqueIndex()
+    val email = varchar("email", 100).uniqueIndex()
+    val gender = varchar("gender", 1).nullable()
     val createdAt = datetime("created_at").default(LocalDateTime.now())
+    val updatedAt = datetime("updated_at").default(LocalDateTime.now())
+
+    override val id: Column<EntityID<String>> = userId.entityId()
 }
 
 class User(id: EntityID<String>) : Entity<String>(id) {
     companion object : EntityClass<String, User>(Users)
 
+    var email by Users.email
     var gender by Users.gender
     var createdAt by Users.createdAt
+    var updatedAt by Users.updatedAt
 }
