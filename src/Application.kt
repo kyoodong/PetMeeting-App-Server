@@ -1,5 +1,6 @@
 package com.kyoodong
 
+import com.kyoodong.config.DatabaseInitializer
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
@@ -51,6 +52,8 @@ fun Application.module(testing: Boolean = false) {
             }
         }
     }
+
+    DatabaseInitializer.init()
 }
 
 fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit) {
