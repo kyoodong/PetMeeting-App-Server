@@ -12,6 +12,8 @@ object Users : IdTable<String>() {
     val userId = varchar("id", 100).uniqueIndex()
     val email = varchar("email", 100).uniqueIndex()
     val gender = varchar("gender", 1).nullable()
+    val age = integer("age").nullable()
+    val profileImage = blob("profile_image").nullable()
     val createdAt = datetime("created_at").default(LocalDateTime.now())
     val updatedAt = datetime("updated_at").default(LocalDateTime.now())
 
@@ -23,6 +25,8 @@ class User(id: EntityID<String>) : Entity<String>(id) {
 
     var email by Users.email
     var gender by Users.gender
+    var age by Users.age
+    var profileImage by Users.profileImage
     var createdAt by Users.createdAt
     var updatedAt by Users.updatedAt
 }
