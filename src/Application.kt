@@ -29,9 +29,6 @@ const val DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
-//    val client = HttpClient(Apache) {
-//    }
-
     install(DefaultHeaders)
     install(CallLogging)
     install(ContentNegotiation) {
