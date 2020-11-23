@@ -39,7 +39,7 @@ fun Routing.user(service: UserService) {
             withContext(Dispatchers.IO) {
                 val body = call.receive<UserRequest>()
                 service.new(body.id, body.email)
-                call.response.status(HttpStatusCode.Created)
+                call.response.status(HttpStatusCode.OK)
             }
         }
 
@@ -53,7 +53,7 @@ fun Routing.user(service: UserService) {
 
                 val body = call.receive<UpdateUserRequest>()
                 service.update(id, body)
-                call.response.status(HttpStatusCode.NoContent)
+                call.response.status(HttpStatusCode.OK)
             }
         }
 
