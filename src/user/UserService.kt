@@ -6,6 +6,7 @@ import com.kyoodong.user.model.UpdateUserRequest
 import com.kyoodong.user.model.UserResponse
 import io.ktor.features.*
 import io.ktor.util.*
+import org.jetbrains.exposed.sql.statements.api.ExposedBlob
 import java.time.LocalDateTime
 
 /**
@@ -55,30 +56,21 @@ class UserService {
             if (request.age != null)
                 age = request.age
 
-//            if (request.profileImage != null) {
-//                val baos = ByteArrayOutputStream()
-//                suspend {
-//                    request.profileImage.forEachPart { part ->
-//                        when (part) {
-//                            is PartData.FormItem -> {
-//                                if (part.name == "title") {
-//                                    System.out.println(part.name)
-//                                }
-//                            }
-//
-//                            is PartData.FileItem -> {
-//                                part.streamProvider().use { input ->
-//                                    baos.buffered().use { output ->
-//                                        input.copyTo(output)
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                baos.close()
-//                profileImage = ExposedBlob(baos.toByteArray())
-//            }
+            updatedAt = LocalDateTime.now()
+        }
+    }
+
+    /**
+     * 사용자 프로필 이미지를 수정하는 메소드
+     * @param id 수정할 사용자 아이디
+     * @param byteArray 이미지 bytearray 데이터
+     */
+    suspend fun updateProfileImage(id: String, byteArray: ByteArray) = query {
+        val user = User.findById(id)
+            ?: throw NotFoundException()
+
+        user.apply {
+            profileImage = ExposedBlob(byteArray)
             updatedAt = LocalDateTime.now()
         }
     }
