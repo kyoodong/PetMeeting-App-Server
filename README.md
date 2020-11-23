@@ -22,8 +22,8 @@ method : GET
 <pre><code>테스트 코드  
 curl --location --request GET '127.0.0.1:8080/users/test1'</code></pre>
 
-### 회원가입  
-url : **/users/test1**  
+### 성별 설정  
+url : **/users/{id}**  
 method : PUT  
 <pre><code>테스트 코드  
 curl --location --request PUT '127.0.0.1:8080/users/test1' \
