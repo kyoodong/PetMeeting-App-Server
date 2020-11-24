@@ -1,5 +1,7 @@
 package com.kyoodong.config
 
+import com.kyoodong.entity.Breeds
+import com.kyoodong.entity.Dogs
 import com.kyoodong.entity.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -14,6 +16,8 @@ object DatabaseInitializer {
         Database.connect(HikariDataSource(hikariConfig()))
         transaction {
             create(Users)
+            create(Breeds)
+            create(Dogs)
         }
     }
 }
