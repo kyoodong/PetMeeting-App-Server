@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
 object Breeds : IntIdTable() {
-    val name = varchar("name", 45)
+    val name = varchar("name", 45).uniqueIndex()
     val category = varchar("category", 10)
 }
 
